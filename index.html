@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090806">
+<title>Dubái Malabo — Menú & Reservas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@500;700;800;900&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080706;
+  --surface:#15110c;
+  --surface2:#211a10;
+  --text:#f7eee0;
+  --muted:#b9a990;
+  --gold:#d6a928;
+  --gold2:#f2c94c;
+  --red:#b72f20;
+  --line:rgba(214,169,40,.24);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#030303}
+body{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(214,169,40,.10),transparent 34rem),
+    #030303;
+  color:var(--text);
+  font-family:Karla,sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+}
+.phone{
+  width:100%;
+  max-width:460px;
+  min-height:100vh;
+  background:var(--bg);
+  box-shadow:0 0 80px rgba(0,0,0,.75);
+  overflow:hidden;
+}
+header{
+  padding:22px 22px 18px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#0c0906,#080706);
+}
+.logo{
+  width:132px;
+  height:112px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  margin:0 auto 4px;
+  mix-blend-mode:screen;
+}
+.eyebrow{
+  color:var(--gold2);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.tagline{margin-top:6px;color:var(--muted);font-style:italic;font-size:13px}
+
+.event{
+  margin:18px 16px 0;
+  border:1px solid rgba(214,169,40,.35);
+  border-radius:18px;
+  overflow:hidden;
+  background:#0d0a07;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+.event img{
+  width:100%;
+  display:block;
+  aspect-ratio:853/1280;
+  object-fit:cover;
+}
+.event-body{padding:15px 16px 17px}
+.event-badge{
+  display:inline-block;
+  background:var(--gold);
+  color:#0a0805;
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.event h2{
+  font-family:"Big Shoulders Text",sans-serif;
+  font-size:30px;
+  line-height:.95;
+  margin:10px 0 6px;
+  text-transform:uppercase;
+}
+.event p{color:var(--muted);font-size:13px;line-height:1.45}
+.event-actions{display:flex;gap:9px;margin-top:14px}
+.btn{
+  flex:1;
+  border:0;
+  border-radius:11px;
+  padding:12px 10px;
+  font-weight:800;
+  font-size:13px;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+}
+.btn-gold{background:var(--gold);color:#090704}
+.btn-dark{background:var(--surface2);color:var(--text);border:1px solid var(--line)}
+
+nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:16px 18px 11px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(8,7,6,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(214,169,40,.14);
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+.pill{
+  flex:0 0 auto;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+.pill.active{background:var(--gold);color:#0b0805;border-color:var(--gold)}
+
+main{padding:0 18px 135px}
+section{padding-top:26px;scroll-margin-top:64px}
+.section-title{
+  font-family:"Big Shoulders Text",sans-serif;
+  color:var(--gold2);
+  font-size:22px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+.section-title:after{content:"";flex:1;height:1px;background:var(--line)}
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+.item-info{flex:1}
+.item-name{font-size:15px;font-weight:700}
+.item-desc{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px;line-height:1.35}
+.item-price{font-size:13px;color:var(--gold2);font-weight:800;margin-top:6px}
+.item-right{display:flex;align-items:center}
+.qty-control{display:flex;align-items:center;gap:9px}
+.qty-btn{
+  width:30px;height:30px;border-radius:8px;
+  border:1px solid rgba(214,169,40,.4);
+  background:var(--surface2);color:var(--gold2);
+  font-size:17px;font-weight:800;cursor:pointer;
+}
+.qty-num{min-width:14px;text-align:center;font-weight:800}
+
+footer{padding:28px 22px 40px;text-align:center;color:var(--muted);font-size:11px;line-height:1.6}
+footer strong{color:var(--gold2);letter-spacing:.08em}
+
+.order-bar{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  width:min(460px,100%);
+  transform:translate(-50%,110%);
+  transition:transform .25s ease;
+  z-index:50;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(21,17,12,.98);
+  border-top:1px solid rgba(214,169,40,.35);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:0 -15px 35px rgba(0,0,0,.35);
+}
+.order-bar.visible{transform:translate(-50%,0)}
+.order-summary{font-size:12px;color:var(--muted)}
+.order-total{display:block;color:var(--text);font-family:"Big Shoulders Text";font-size:21px;font-weight:800}
+.cta{
+  background:#25d366;color:#061008;border:0;
+  padding:12px 16px;border-radius:999px;
+  font-weight:800;font-size:13px;cursor:pointer;
+  white-space:nowrap;
+}
+.notice{
+  margin-top:18px;
+  padding:12px 14px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+  color:var(--muted);
+  font-size:11.5px;
+  line-height:1.45;
+}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<header>
+  <img class="logo" src="assets/dubai-logo.jpeg" alt="Dubái Malabo">
+  <div class="eyebrow">Malabo · Nightlife · Shishas · Cocktails · Música · VIP</div>
+  <p class="tagline">Malabo es Dubái</p>
+</header>
+
+<div class="event">
+  <img src="assets/fiebre-mas-intensa.jpeg" alt="Fiebre más intensa — evento Dubái Malabo">
+  <div class="event-body">
+    <span class="event-badge">Evento destacado · Hoy</span>
+    <h2>Fiebre más intensa</h2>
+    <p>Reserva tu mesa y disfruta del ambiente de Dubái Malabo. El menú digital permite seleccionar tus consumiciones y enviarlas directamente por WhatsApp.</p>
+    <div class="event-actions">
+      <a class="btn btn-gold" href="#menu">Ver menú</a>
+      <a class="btn btn-dark" href="#reservas">Reservar</a>
+    </div>
+  </div>
+</div>
+
+<nav id="nav"></nav>
+
+<main id="menu"></main>
+
+<section id="reservas" style="padding:26px 18px 0">
+  <div class="section-title">Reservas</div>
+  <div class="notice">
+    Si te propones, también puedo diseñar con <strong>QR, número de personas y nombre</strong>,
+    o hacer que cada QR identifique automáticamente la mesa.
+  </div>
+</section>
+
+<footer>
+  <strong>DUBÁI MALABO</strong>
+  <p style="margin-top:7px">Menú digital · Pedidos y reservas por WhatsApp</p>
+  <p>Proyecto demo para presentación al establecimiento</p>
+</footer>
+
+<div class="order-bar" id="orderBar">
+  <div class="order-summary">
+    <span id="orderCount">0 platos</span>
+    <span class="order-total" id="orderTotal">0 XAF</span>
+  </div>
+  <button class="cta" id="sendOrder">Pedir por WhatsApp</button>
+</div>
+
+</div>
+
+<script>
+/* ==========================
+   CONFIGURACIÓN DEL NEGOCIO
+   ========================== */
+const WHATSAPP_NUMBER = "240000000000"; // Sustituir por el número real de Dubái
+
+const MENU = [
+  {cat:"Cócteles",items:[
+    {id:"co1",name:"Dubai Signature",desc:"Cóctel de autor de la casa",price:4500},
+    {id:"co2",name:"Mojito de maracuyá",desc:"Maracuyá, lima y hierbabuena",price:3500}
+  ]},
+  {cat:"Botellas",items:[
+    {id:"bo1",name:"Vodka premium",desc:"Botella",price:65000},
+    {id:"bo2",name:"Whisky reserva",desc:"Botella",price:75000}
+  ]},
+  {cat:"Bebidas",items:[
+    {id:"be1",name:"Cerveza",desc:"Unidad",price:1500},
+    {id:"be2",name:"Agua mineral",desc:"Unidad",price:500}
+  ]},
+  {cat:"Picoteo",items:[
+    {id:"pi1",name:"Tabla de embutidos",desc:"Para compartir",price:8000},
+    {id:"pi2",name:"Brochetas mixtas",desc:"Selección de la casa",price:6500}
+  ]}
+];
+
+const order = {};
+
+function fmt(n){return n.toLocaleString("es-ES")+" XAF";}
+
+function buildMenu(){
+  const nav=document.getElementById("nav");
+  const main=document.getElementById("menu");
+
+  MENU.forEach((group,gi)=>{
+    const sectionId="sec-"+gi;
+
+    const pill=document.createElement("div");
+    pill.className="pill"+(gi===0?" active":"");
+    pill.textContent=group.cat;
+    pill.onclick=()=>document.getElementById(sectionId).scrollIntoView({behavior:"smooth",block:"start"});
+    nav.appendChild(pill);
+
+    const section=document.createElement("section");
+    section.id=sectionId;
+
+    const title=document.createElement("div");
+    title.className="section-title";
+    title.textContent=group.cat;
+    section.appendChild(title);
+
+    group.items.forEach(item=>{
+      const row=document.createElement("div");
+      row.className="item";
+      row.innerHTML=`
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-desc">${item.desc||""}</div>
+          <div class="item-price">${fmt(item.price)}</div>
+        </div>
+        <div class="item-right">
+          <div class="qty-control">
+            <button class="qty-btn" data-action="minus" data-id="${item.id}">−</button>
+            <span class="qty-num" id="qty-${item.id}">0</span>
+            <button class="qty-btn" data-action="plus" data-id="${item.id}">+</button>
+          </div>
+        </div>`;
+      section.appendChild(row);
+    });
+
+    main.appendChild(section);
+  });
+}
+
+function findItem(id){
+  for(const group of MENU){
+    const item=group.items.find(x=>x.id===id);
+    if(item) return item;
+  }
+}
+
+function updateOrder(id,delta){
+  const next=Math.max(0,(order[id]||0)+delta);
+  if(next===0) delete order[id]; else order[id]=next;
+  document.getElementById("qty-"+id).textContent=next;
+  refreshOrder();
+}
+
+function refreshOrder(){
+  const ids=Object.keys(order);
+  const count=ids.reduce((s,id)=>s+order[id],0);
+  const total=ids.reduce((s,id)=>s+order[id]*findItem(id).price,0);
+
+  document.getElementById("orderCount").textContent=count+(count===1?" plato":" platos");
+  document.getElementById("orderTotal").textContent=fmt(total);
+  document.getElementById("orderBar").classList.toggle("visible",count>0);
+}
+
+document.getElementById("menu").addEventListener("click",e=>{
+  const btn=e.target.closest(".qty-btn");
+  if(!btn) return;
+  updateOrder(btn.dataset.id,btn.dataset.action==="plus"?1:-1);
+});
+
+document.getElementById("sendOrder").addEventListener("click",()=>{
+  const ids=Object.keys(order);
+  if(!ids.length) return;
+
+  const mesa=new URLSearchParams(location.search).get("mesa") || "Por indicar";
+  const lines=ids.map(id=>{
+    const item=findItem(id);
+    return `• ${order[id]}x ${item.name} — ${fmt(item.price*order[id])}`;
+  });
+
+  const total=ids.reduce((s,id)=>s+order[id]*findItem(id).price,0);
+  const msg=
+`Hola, quiero hacer un pedido en Dubái Malabo:
+
+${lines.join("\n")}
+
+Total: ${fmt(total)}
+Mesa: ${mesa}`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,"_blank");
+});
+
+window.addEventListener("scroll",()=>{
+  const sections=[...document.querySelectorAll("#menu section")];
+  const pills=[...document.querySelectorAll(".pill")];
+  let active=0;
+  sections.forEach((section,i)=>{
+    if(section.getBoundingClientRect().top<=100) active=i;
+  });
+  pills.forEach((pill,i)=>pill.classList.toggle("active",i===active));
+},{passive:true});
+
+buildMenu();
+</script>
+</body>
+</html>
